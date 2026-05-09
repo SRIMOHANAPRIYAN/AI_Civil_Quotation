@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Civil Quotation Proposal</title>
+    <style>
+        body { 
+            font-family: 'Times New Roman', Times, serif; 
+            color: #000; 
+            line-height: 1.6; 
+            font-size: 16px;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .page-break { 
+            page-break-after: always; 
+        }
+        
+        .page-content {
+            padding: 20px;
+        }
+
+        /* Page 1: Letterhead Styles */
+        .header-date { text-align: right; font-weight: bold; margin-bottom: 30px; }
+        .company-title { font-size: 24px; font-weight: bold; color: #1e3a8a; margin-bottom: 20px; text-transform: uppercase; }
+        .recipient { margin-bottom: 30px; }
+        .subject { font-weight: bold; text-decoration: underline; margin: 20px 0; }
+        .letter-body { text-align: justify; margin-bottom: 40px; }
+        .annexure-list { margin-left: 20px; font-weight: bold; }
+        .signature-block { margin-top: 50px; }
+        .footer-details { margin-top: 20px; font-size: 14px; }
+
+        /* Page 2 & 3: Annexure Styles */
+        h2.annexure-title { text-align: center; text-decoration: underline; margin-bottom: 5px; }
+        h3.annexure-subtitle { text-align: center; text-transform: uppercase; margin-top: 0; margin-bottom: 30px; }
+        
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #000; padding: 12px; vertical-align: top; }
+        th { background-color: #f3f4f6; text-align: left; }
+        
+        .scope-list { list-style-type: upper-alpha; margin-top: 10px; margin-bottom: 15px; padding-left: 20px; }
+        .financials { text-align: right; font-weight: bold; }
+        
+        /* Terms list */
+        .terms-list { list-style-type: decimal; margin-top: 20px; padding-left: 20px; line-height: 2; }
+        .terms-list li { font-weight: bold; text-transform: uppercase; }
+    </style>
+</head>
+<body>
+
+    <div class="page-content page-break">
+        <div class="header-date">Date: {{ data.date }}</div>
+        
+        
+        <div class="recipient">
+            To,<br>
+            <strong>Mr. {{ data.customer_name }}</strong><br>
+            {{ data.company_name if data.company_name != "N/A" else "" }}<br>
+            {{ data.phone }}
+        </div>
+        
+        <div class="letter-body">
+            <p>Dear Sir,</p>
+            <p class="subject">Sub: Quotation for Waterproofing & Coatings - reg.</p>
+            
+            <p>We thank you for inviting us to quote for your requirement of Civil Services for your building.</p>
+            
+            <p>We take great pleasure in submitting our most competitive offer for the arrangement of the requested services in the form of the following annexures for your kind consideration.</p>
+            
+            <div class="annexure-list">
+                <p>ANNEXURE-I: QUOTATION FOR SERVICES</p>
+                <p>ANNEXURE-II: TERMS AND CONDITIONS</p>
+            </div>
+            
+            <p>We trust you shall find our offer in line with your requirements. For further information or clarification, please feel free to contact us.</p>
+            
+            <p>Thanking you and assuring you of our best services and attention at all times. We now look forward to receiving your most valued order.</p>
+        </div>
+        
+        <div class="signature-block">
+            <p>Yours truly,</p>
+            <p><strong>For Apex Civil Associates</strong><br><br><br>Authorized Signatory</p>
+        </div>
+        
+       
+    </div>
+
+    <div class="page-content page-break">
+        <h2 class="annexure-title">ANNEXURE-I</h2>
+        <h3 class="annexure-subtitle">Quotation for Civil Services</h3>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th width="10%">S.No</th>
+                    <th width="50%">Description</th>
+                    <th width="40%">Rate</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for service in data.services %}
+                <tr>
+                    <td>{{ loop.index }}.</td>
+                    <td>
+                        <strong>{{ service.service_category | upper }}</strong>
+                        
+                        <ol class="scope-list">
+                            <li>Surface Cleaning</li>
+                            <li>Crack V Groove cutting</li>
+                            <li>Crack filling</li>
+                            <li>Primer - 1 coat</li>
+                            <li>Application of {{ service.chemical_brand }} - 2 coats</li>
+                        </ol>
+                        
+                        <em>Warranty of {{ service.warranty_years }} years will be provided by the company.</em>
+                    </td>
+                    <td>
+                        Total sq.ft = {{ service.area_sqft }} sq.ft<br>
+                        Price per sq.ft = ₹{{ service.rate_per_sqft }}<br><br>
+                        <strong>Total Amount = ₹{{ service.service_total_price }}</strong>
+                    </td>
+                </tr>
+                {% endfor %}
+                
+                <tr>
+                    <td colspan="2" class="financials">SUBTOTAL:</td>
+                    <td>₹{{ data.subtotal }}</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="financials">GST (18%):</td>
+                    <td>₹{{ data.gst_amount }}</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="financials">GRAND TOTAL:</td>
+                    <td><strong>₹{{ data.grand_total }}</strong></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="page-content">
+        <h2 class="annexure-title">ANNEXURE-II</h2>
+        <h3 class="annexure-subtitle">Terms And Conditions</h3>
+        
+        <ol class="terms-list">
+            <li>An advance payment of 50% of the total amount is required for the purchase of materials.</li>
+            <li>Another 25% of payment should be given after application of 1st coat.</li>
+            <li>Remaining 25% should be given after application of 2nd coat.</li>
+            <li>In case of any leakages pressure grout will be done at a price of ₹150 per hole.</li>
+            <li>Any electrical, civil, carpentry, masonry work to be done by customer.</li>
+            <li>Warranty will be provided by the company.</li>
+            <li>Water and electricity should be provided by the customer.</li>
+            <li>We expect your valuable order.</li>
+        </ol>
+    </div>
+
+</body>
+</html>

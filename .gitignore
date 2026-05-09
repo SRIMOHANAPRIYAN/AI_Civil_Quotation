@@ -1,0 +1,37 @@
+# ----------------------------------
+# 1. Security & Secrets (CRITICAL)
+# ----------------------------------
+# Never push your Google Service Account keys to GitHub!
+credentials.json
+.env
+
+# ----------------------------------
+# 2. Virtual Environment
+# ----------------------------------
+# GitHub doesn't need your installed packages, just your code.
+civil_env/
+
+# ----------------------------------
+# 3. App-Specific Temp & Generated Files
+# ----------------------------------
+# Ignore temporary voice recordings from Whisper
+temp_voice.webm
+
+# Ignore all generated client PDF quotations (Privacy)
+app/static/exports/*.pdf
+
+# ----------------------------------
+# 4. Python & Flask Caches
+# ----------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+instance/
+.webassets-cache
+
+# ----------------------------------
+# 5. OS Generated Files (Mac)
+# ----------------------------------
+.DS_Store
+.AppleDouble
+.LSOverride

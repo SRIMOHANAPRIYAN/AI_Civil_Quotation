@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script>
+        // This script automatically injects page numbers into the footer
+        function subst() {
+            var vars = {};
+            var x = document.location.search.substring(1).split('&');
+            for (var i in x) {var z = x[i].split('=', 2); vars[z[0]] = decodeURIComponent(z[1]);}
+            var x = ['frompage', 'topage', 'page', 'webpage', 'section', 'subsection', 'subsubsection'];
+            for (var i in x) {
+                var y = document.getElementsByClassName(x[i]);
+                for (var j = 0; j < y.length; ++j) y[j].textContent = vars[x[i]];
+            }
+        }
+    </script>
+    <style>
+        body { 
+            font-family: 'Times New Roman', Times, serif; 
+            margin: 0; 
+            padding: 10px 0; 
+            border-top: 1px solid #ccc; 
+            font-size: 14px; 
+            color: #555; 
+        }
+        .footer-content { display: flex; justify-content: space-between; align-items: center; }
+        .company-info { text-align: left; }
+        .page-number { text-align: right; font-weight: bold; }
+    </style>
+</head>
+<body onload="subst()">
+    <table style="width: 100%;">
+        <tr>
+            <td class="company-info">
+                123 Industrial Estate, Tech City | +91 98765 43210 | contact@apexcivil.com
+            </td>
+            <td class="page-number">
+                Page <span class="page"></span> of <span class="topage"></span>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

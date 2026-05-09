@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Civil And Coatings Quotation Generator</title>
+    <style>
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            background-color: #f8fafc; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+        }
+        .container { 
+            background: white; 
+            padding: 40px; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
+            width: 100%; 
+            max-width: 600px; 
+        }
+        h1 { 
+            color: #0f172a; 
+            margin-top: 0; 
+            text-align: center;
+        }
+        p.subtitle {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 25px;
+        }
+        textarea { 
+            width: 100%; 
+            height: 120px; 
+            padding: 15px; 
+            border: 2px solid #e2e8f0; 
+            border-radius: 8px; 
+            font-size: 16px; 
+            margin-bottom: 20px; 
+            box-sizing: border-box; 
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+        textarea:focus {
+            border-color: #3b82f6;
+            outline: none;
+        }
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .record-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        button { 
+            border: none; 
+            padding: 14px 24px; 
+            border-radius: 8px; 
+            font-size: 16px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            transition: all 0.2s ease;
+        }
+        .btn-secondary { 
+            background-color: #ef4444; 
+            color: white; 
+            flex-shrink: 0;
+        }
+        .btn-secondary:hover { 
+            background-color: #dc2828; 
+        }
+        .btn-primary { 
+            background-color: #2563eb; 
+            color: white; 
+            width: 100%;
+        }
+        .btn-primary:hover { 
+            background-color: #1d4ed8; 
+        }
+        #status-text {
+            color: #4caf50;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        .routing-options {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f1f5f9;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #334155;
+            justify-content: center;
+        }
+        .routing-options label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .routing-options input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Civil And Coatings Quotation Generator</h1>
+        <p class="subtitle">Type client details, record product info, or combine both!</p>
+        
+        <div class="input-section">
+            <textarea id="text-input" placeholder="e.g., Aravind needs 2000 sq ft of terrace waterproofing with Dr. Fixit..."></textarea>
+
+            <div class="routing-options">
+                <label>
+                    <input type="checkbox" id="chk_sheets" checked> Save to Google Sheets
+                </label>
+            </div>
+            
+            <div class="controls">
+                <div class="record-group">
+                    <button id="record-btn" class="btn-secondary">Start Recording</button>
+                    <span id="status-text"></span>
+                </div>
+                
+                <button id="generate-btn" class="btn-primary">Generate Quotation</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+</body>
+</html>
