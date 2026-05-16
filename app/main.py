@@ -56,6 +56,9 @@ async def generate_fusion():
 
         # 5. LLM Extraction (Using Civil Schema)
         extracted_data = await extract_quotation_data(combined_prompt)
+        for service in quotation.services:
+            if service.area_sqft <= 0:
+                return {"error": "Validation Error: Area must be greater than 0 sq ft."}, 400
         if not extracted_data.services:
             return {"error": "Could not identify any valid civil engineering services in your request."}, 400
 
