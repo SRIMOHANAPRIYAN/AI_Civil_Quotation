@@ -132,4 +132,8 @@ def generate():
         return {"error": f"Generation Error: {e}"}, 500
 
 if __name__ == "__main__":
-    app.run(debug=True, port=8000)
+    port = int(os.environ.get("PORT", 8000))
+    app.run(host="0.0.0.0", port=port, debug=False)
+    
+# if __name__ == "__main__":
+#     app.run(debug=True, port=8000)
