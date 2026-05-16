@@ -56,9 +56,12 @@ async def generate_fusion():
 
         # 5. LLM Extraction (Using Civil Schema)
         extracted_data = await extract_quotation_data(combined_prompt)
-        for service in quotation.services:
+        
+        # --- FIX APPLIED HERE: Changed 'quotation' to 'extracted_data' ---
+        for service in extracted_data.services:
             if service.area_sqft <= 0:
                 return {"error": "Validation Error: Area must be greater than 0 sq ft."}, 400
+                
         if not extracted_data.services:
             return {"error": "Could not identify any valid civil engineering services in your request."}, 400
 
@@ -137,6 +140,3 @@ def generate():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8000))
     app.run(host="0.0.0.0", port=port, debug=False)
-    
-# if __name__ == "__main__":
-#     app.run(debug=True, port=8000)
