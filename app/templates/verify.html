@@ -20,10 +20,20 @@
         <div class="alert">
             <strong>Action Required:</strong> Review the extracted data below. You can manually edit names, quantities, or prices directly in the code block before generating the final PDF.
         </div>
-        <form action="/generate" method="POST">
+
+        <form action="/generate" method="POST" onsubmit="disableButton()">
             <textarea name="edited_json">{{ json_data }}</textarea>
-            <button type="submit">Approve & Generate PDF</button>
+            <button type="submit" id="final-btn">Approve & Generate PDF</button>
         </form>
+        
+        <script>
+            function disableButton() {
+                const btn = document.getElementById('final-btn');
+                btn.innerText = "Generating PDF... Please wait.";
+                btn.style.backgroundColor = "#64748b"; 
+                setTimeout(() => { btn.disabled = true; }, 50); 
+            }
+        </script>
         <a href="/" class="back-link">← Start Over</a>
     </div>
 </body>
