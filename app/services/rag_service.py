@@ -24,14 +24,14 @@ def get_google_client():
 
 def fetch_rate_and_warranty(service_category: str, chemical_brand: str) -> dict:
     """
-    RAG Retrieval: Searches 'Sheet 2' for the correct rate and warranty.
+    RAG Retrieval: Searches 'Master Rates' for the correct rate and warranty.
     """
     try:
         client = get_google_client()
         sheet_id = os.getenv("GOOGLE_SHEET_ID")
         
         # Make sure this matches the exact tab name at the bottom of your Google Sheet
-        sheet = client.open_by_key(sheet_id).worksheet("sheet 2") 
+        sheet = client.open_by_key(sheet_id).worksheet("Master Rates") 
         records = sheet.get_all_records()
 
         # Step 1: Try to find an exact match for both Category and Brand
