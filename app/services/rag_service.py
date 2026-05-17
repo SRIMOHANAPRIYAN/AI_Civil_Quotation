@@ -28,7 +28,7 @@ def fetch_rate_and_warranty(service_category: str, chemical_brand: str) -> dict:
     """
     try:
         client = get_google_client()
-        sheet_id = os.getenv("GOOGLE_SHEET_ID")
+        sheet_id = os.getenv("GOOGLE_SHEET_ID").strip()
         
         # Make sure this matches the exact tab name at the bottom of your Google Sheet
         sheet = client.open_by_key(sheet_id).worksheet("Master Rates") 

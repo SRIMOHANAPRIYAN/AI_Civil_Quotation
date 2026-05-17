@@ -26,7 +26,7 @@ def append_to_ledger(quotation_number: str, customer_name: str, service_category
 
     try:
         client = get_google_client()
-        sheet_id = os.getenv("GOOGLE_SHEET_ID")
+        sheet_id = os.getenv("GOOGLE_SHEET_ID").strip()
         ledger_sheet = client.open_by_key(sheet_id).worksheet("Ledger")
         current_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         new_row = [
